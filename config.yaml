@@ -1,0 +1,42 @@
+# Crypto Rate Agent Configuration
+
+# Primary Exchange settings
+exchange: "binance"          # Supported: binance, coinbase, okx, bybit, kucoin
+update_interval_ms: 500      # 500ms = 0.5 seconds data check interval
+
+# List of cryptocurrencies to monitor
+currencies:
+  - "BTC/USDT"
+  - "ETH/USDT"
+  - "SOL/USDT"
+  - "BNB/USDT"
+  - "XRP/USDT"
+  - "ADA/USDT"
+  - "DOGE/USDT"
+  - "AVAX/USDT"
+  - "LINK/USDT"
+  - "DOT/USDT"
+
+# Database & Storage Retention Settings
+storage:
+  db_path: "data/crypto_rates.db"
+  tick_retention_days: 7     # Raw 0.5s ticks deleted after 7 days
+  candle_retention_days: 90  # Aggregated 1m candles kept for 90 days for trend analysis
+
+# Alert & Notification Settings
+alerts:
+  enabled: true
+  min_confidence_score: 80.0  # Trigger alert only when confidence >= 80%
+  telegram:
+    token: ""                 # Your Telegram Bot Token (from @BotFather)
+    chat_id: ""               # Your Telegram Chat ID
+  discord:
+    webhook_url: ""           # Optional Discord Webhook URL
+
+# Web Dashboard Settings
+dashboard:
+  host: "127.0.0.1"
+  port: 8000
+  default_symbol: "BTC/USDT"
+  chart_type: "candlestick"   # Configurable chart type: "candlestick" or "line"
+  timeframe: "1m"             # Default chart candlestick aggregation interval: 1s, 5s, 1m, 1h

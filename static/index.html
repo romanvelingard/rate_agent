@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Rate Agent - Real-Time Exchange Monitor</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- TradingView Lightweight Charts Library -->
+    <script src="https://unpkg.com/lightweight-charts/dist/lightweight-charts.standalone.production.js"></script>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="navbar">
+            <div class="brand">
+                <div class="logo-icon">⚡</div>
+                <div class="brand-text">
+                    <h1>Crypto Rate Agent</h1>
+                    <span class="sub-text">0.5s High-Frequency Exchange Stream</span>
+                </div>
+            </div>
+            <div class="header-badges">
+                <div class="badge" id="exchange-badge">Exchange: Loading...</div>
+                <div class="badge" id="chart-type-badge">Chart: Candlestick</div>
+                <div class="status-indicator">
+                    <span class="pulse-dot"></span>
+                    <span id="conn-status">Connecting...</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="dashboard-grid">
+            <!-- Sidebar: Crypto Currency List -->
+            <aside class="sidebar-card">
+                <div class="card-header">
+                    <h2>Tracked Cryptos</h2>
+                    <span class="badge-mini" id="symbol-count">0 Pairs</span>
+                </div>
+                <div class="crypto-list" id="crypto-list">
+                    <!-- Dynamic currency items inserted here -->
+                </div>
+            </aside>
+
+            <!-- Main Chart & Analytics Workspace -->
+            <section class="main-content">
+                <!-- Selected Crypto Top Metric Strip -->
+                <div class="metrics-card">
+                    <div class="symbol-title-group">
+                        <h2 id="active-symbol-title">BTC/USDT</h2>
+                        <div class="price-display">
+                            <span class="main-price" id="active-price">$0.00</span>
+                            <span class="price-change-pill positive" id="active-24h-change">+0.00% (24h)</span>
+                            <span class="price-change-pill" id="active-7d-change">+0.00% (7d)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="quick-stats">
+                        <div class="stat-box">
+                            <span class="label">24h High</span>
+                            <span class="val" id="stat-high">$0.00</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="label">24h Low</span>
+                            <span class="val" id="stat-low">$0.00</span>
+                        </div>
+                        <div class="stat-box">
+                            <span class="label">24h Volume</span>
+                            <span class="val" id="stat-volume">0.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Real-Time Chart Card -->
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <div class="chart-title">
+                            <h3>Real-Time Exchange Rate Chart</h3>
+                            <span class="timeframe-label" id="timeframe-badge">1-Minute Candles</span>
+                        </div>
+                    </div>
+                    <div id="chart-container" class="chart-view"></div>
+                </div>
+
+                <!-- Tendency & Technical Indicators Panel -->
+                <div class="analytics-grid">
+                    <div class="analytics-card">
+                        <div class="card-header">
+                            <h3>Tendency & Signal Analysis</h3>
+                            <span class="confidence-badge" id="trend-signal">ANALYZING</span>
+                        </div>
+                        <div class="tendency-body">
+                            <div class="gauge-container">
+                                <div class="gauge-label">Signal Confidence Score</div>
+                                <div class="confidence-bar-bg">
+                                    <div class="confidence-bar-fill" id="confidence-fill" style="width: 50%;"></div>
+                                </div>
+                                <div class="confidence-val" id="confidence-val">50.0%</div>
+                            </div>
+                            <p class="summary-text" id="analysis-summary">Loading technical analysis calculation...</p>
+                        </div>
+                    </div>
+
+                    <div class="analytics-card">
+                        <div class="card-header">
+                            <h3>Technical Indicators</h3>
+                        </div>
+                        <div class="indicators-list">
+                            <div class="indicator-item">
+                                <span class="ind-name">Exponential MA (20)</span>
+                                <span class="ind-val" id="ind-ema20">--</span>
+                            </div>
+                            <div class="indicator-item">
+                                <span class="ind-name">Exponential MA (50)</span>
+                                <span class="ind-val" id="ind-ema50">--</span>
+                            </div>
+                            <div class="indicator-item">
+                                <span class="ind-name">Relative Strength Index (RSI 14)</span>
+                                <span class="ind-val" id="ind-rsi">--</span>
+                            </div>
+                            <div class="indicator-item">
+                                <span class="ind-name">Data Retention Policy</span>
+                                <span class="ind-val highlight">7 Days Raw / 90 Days 1m</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

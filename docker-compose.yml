@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  crypto_rate_agent:
+    build: .
+    container_name: crypto_rate_agent
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./config.yaml:/app/config.yaml
+    environment:
+      - PYTHONUNBUFFERED=1
