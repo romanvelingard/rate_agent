@@ -17,9 +17,16 @@ class AlertsConfig(BaseModel):
     discord: DiscordConfig = Field(default_factory=DiscordConfig)
 
 class StorageConfig(BaseModel):
+    enabled: bool = True
+    mode: str = "sqlite"  # "sqlite" (disk persistent DB) or "memory" (RAM + separate CSV files, no DB)
     db_path: str = "data/crypto_rates.db"
+    csv_dir: str = "data"  # Directory for individual crypto CSV files (e.g. BTC_USDT.csv, ETH_USDT.csv)
+    record_csv: bool = True
     tick_retention_days: int = 7
     candle_retention_days: int = 90
+    max_memory_ticks: int = 500
+    max_memory_candles: int = 300
+    max_memory_symbols: int = 3
 
 class DashboardConfig(BaseModel):
     host: str = "127.0.0.1"

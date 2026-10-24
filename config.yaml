@@ -6,20 +6,18 @@ update_interval_ms: 500      # 500ms = 0.5 seconds data check interval
 
 # List of cryptocurrencies to monitor
 currencies:
-  - "BTC/USDT"
-  - "ETH/USDT"
-  - "SOL/USDT"
-  - "BNB/USDT"
-  - "XRP/USDT"
-  - "ADA/USDT"
-  - "DOGE/USDT"
-  - "AVAX/USDT"
-  - "LINK/USDT"
-  - "DOT/USDT"
+  - "ZTT/USDT"
+  - "TACQ/USDT"
+  - "LFIR/USDT"
 
 # Database & Storage Retention Settings
 storage:
+  enabled: true              # Set to false to run in No-DB mode (In-Memory + separate CSV files)
+  mode: "sqlite"             # Options: "sqlite" (persistent DB) or "memory" (no-DB, RAM + CSV)
   db_path: "data/crypto_rates.db"
+  csv_dir: "data"            # Directory where separate CSV files (e.g. BTC_USDT.csv, ETH_USDT.csv, SOL_USDT.csv) are recorded
+  record_csv: true           # Record data to individual CSV files in No-DB mode
+  max_memory_symbols: 3      # Maximum tracked symbols in No-DB mode to save RAM (user limit: up to 3)
   tick_retention_days: 7     # Raw 0.5s ticks deleted after 7 days
   candle_retention_days: 90  # Aggregated 1m candles kept for 90 days for trend analysis
 

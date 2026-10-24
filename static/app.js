@@ -9,7 +9,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     await loadConfig();
     initChart();
     await loadSymbols();
-    await selectSymbol(config.default_symbol || "BTC/USDT");
+    const initialSym = (config && config.currencies && config.currencies.includes(config.default_symbol))
+        ? config.default_symbol
+        : (config && config.currencies && config.currencies[0]) || "BTC/USDT";
+    await selectSymbol(initialSym);
     connectWebSocket();
 });
 
@@ -17,10 +20,23 @@ async function loadConfig() {
     try {
         const res = await fetch("/api/config");
         config = await res.json();
-        currentSymbol = config.default_symbol || "BTC/USDT";
+        currentSymbol = config.default_symbol || (config.currencies && config.currencies[0]) || "BTC/USDT";
         
         document.getElementById("exchange-badge").innerText = `Exchange: ${config.exchange.toUpperCase()}`;
         document.getElementById("chart-type-badge").innerText = `Chart: ${config.chart_type.toUpperCase()}`;
+
+        const modeBadge = document.getElementById("storage-mode-badge");
+        const modeVal = document.getElementById("storage-engine-val");
+        const isMem = config.is_in_memory || config.storage_mode === "memory";
+
+        if (modeBadge) {
+            modeBadge.innerText = isMem ? "Mode: In-Memory (No-DB)" : "Mode: SQLite WAL";
+        }
+        if (modeVal) {
+            modeVal.innerText = isMem 
+                ? `In-Memory (Max 3 Cryptos + CSV Files: ${config.csv_dir || 'data'}/*.csv)` 
+                : "SQLite WAL (7d Raw / 90d Candles)";
+        }
     } catch (e) {
         console.error("Error loading config:", e);
     }

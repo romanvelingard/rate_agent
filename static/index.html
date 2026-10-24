@@ -26,6 +26,7 @@
             <div class="header-badges">
                 <div class="badge" id="exchange-badge">Exchange: Loading...</div>
                 <div class="badge" id="chart-type-badge">Chart: Candlestick</div>
+                <div class="badge" id="storage-mode-badge">Mode: SQLite</div>
                 <div class="status-indicator">
                     <span class="pulse-dot"></span>
                     <span id="conn-status">Connecting...</span>
@@ -123,8 +124,8 @@
                                 <span class="ind-val" id="ind-rsi">--</span>
                             </div>
                             <div class="indicator-item">
-                                <span class="ind-name">Data Retention Policy</span>
-                                <span class="ind-val highlight">7 Days Raw / 90 Days 1m</span>
+                                <span class="ind-name">Storage & Log Engine</span>
+                                <span class="ind-val highlight" id="storage-engine-val">SQLite WAL</span>
                             </div>
                         </div>
                     </div>

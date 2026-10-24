@@ -44,7 +44,10 @@ def create_app(config: AppConfig, storage: StorageEngine, collector: RateCollect
             "currencies": config.currencies,
             "chart_type": config.dashboard.chart_type,
             "default_symbol": config.dashboard.default_symbol,
-            "timeframe": config.dashboard.timeframe
+            "timeframe": config.dashboard.timeframe,
+            "storage_mode": getattr(storage, "storage_type", "sqlite"),
+            "is_in_memory": getattr(storage, "is_in_memory", False),
+            "csv_dir": getattr(storage, "csv_dir", "data")
         }
 
     @app.get("/api/symbols")

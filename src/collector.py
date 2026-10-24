@@ -9,7 +9,7 @@ from src.storage import StorageEngine
 logger = logging.getLogger(__name__)
 
 class RateCollector:
-    def __init__(self, config: AppConfig, storage: StorageEngine):
+    def __init__(self, config: AppConfig, storage: Any):
         self.config = config
         self.storage = storage
         self.symbols = config.currencies
